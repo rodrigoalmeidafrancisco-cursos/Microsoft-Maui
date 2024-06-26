@@ -363,3 +363,196 @@ Neste exemplo, o método AddFont associa a fonte ao nome OpenSansRegular. Você 
 ```
 
 Use as pastas Resources no Android e as pastas iOS na pasta Platforms para recursos específicos da plataforma Android e iOS.
+
+<br />
+
+> Passo 5: Adicionar controles visuais a um aplicativo .NET MAUI
+
+Agora que você usou o modelo do .NET MAUI para criar o aplicativo, a próxima etapa é adicionar a interface do usuário e implementar a lógica de interface do usuário inicial.
+<br /><br />
+Nesta unidade, você aprenderá mais sobre os blocos de construção de um aplicativo .NET MAUI e das estruturas de navegação.
+
+## O que há em um projeto do .NET MAUI?
+
+Para recapitular, um projeto do .NET MAUI contém inicialmente:
+
+- O arquivo MauiProgram.cs que contém o código para criar e configurar o objeto Application.
+- Os arquivos App.xaml e App.xaml.cs que fornecem recursos de interface do usuário e criam a janela inicial para o aplicativo.
+- Os arquivos AppShell.xaml e AppShell.xaml.cs que especificam a página inicial do aplicativo e manipulam o registro de páginas para roteamento de navegação.
+- Os arquivos MainPage.xaml e MainPage.xaml.cs que definem o layout e a lógica da interface do usuário para a página exibida por padrão na janela inicial.
+
+Você pode adicionar mais páginas ao aplicativo conforme necessário e pode criar classes adicionais para implementar a lógica de negócios exigida pelo aplicativo.
+<br /><br />
+Um projeto do .NET MAUI também contém um conjunto padrão de recursos de aplicativo, como imagens, ícones e fontes, e o código de inicialização padrão para cada plataforma.
+
+## A classe do aplicativo
+
+A classe App representa o aplicativo .NET MAUI como um todo. Ela herda um conjunto padrão de comportamentos de Microsoft.Maui.Controls.Application. Lembre-se de que, na unidade anterior, é a classe App que é instanciada e carregada pelo código de inicialização para cada plataforma. O construtor de classe App, por sua vez, geralmente criará uma instância da classe AppShell e a atribuirá à propriedade MainPage. Esse é o código que controla a primeira tela que o usuário vê por meio do que está definido em AppShell.
+<br /><br />
+A classe App também contém:
+
+- Métodos para lidar com eventos de ciclo de vida, incluindo quando o aplicativo é enviado para o segundo plano (ou seja, quando ele deixa de ser o aplicativo em primeiro plano).
+- Métodos para criar Windows para o aplicativo. O aplicativo .NET MAUI tem uma só janela por padrão, mas você pode criar e iniciar janelas adicionais, o que é útil em aplicativos para desktop e tablet.
+
+## Shell
+
+O Shell do .NET MAUI (NET Multi-platform App UI) reduz a complexidade do desenvolvimento de aplicativos fornecendo os recursos fundamentais que a maioria dos aplicativos exige, incluindo:
+
+- Um só local para descrever a hierarquia visual de um aplicativo.
+- Uma experiência de navegação comum para o usuário.
+- Um esquema de navegação baseado em URI que permite a navegação para qualquer página no aplicativo.
+- Um manipulador de pesquisa integrado.
+
+Em um aplicativo de Shell do .NET MAUI, a hierarquia visual do aplicativo é descrita em uma classe funciona como uma subclasse da classe Shell. Essa classe pode ser composta por três objetos hierárquicos principais:
+
+- FlyoutItem ou TabBar. Um FlyoutItem representa um ou mais itens no submenu e deve ser usado quando o padrão de navegação do aplicativo requer um submenu. Uma TabBar representa a barra de guias inferior e deve ser usada quando o padrão de navegação para o aplicativo começa com guias inferiores e não exige um submenu.
+- Tab, que representa o conteúdo agrupado, navegável pelas guias inferiores.
+- ShellContent, que representa os objetos ContentPage para cada guia.
+
+Esses objetos não representam nenhuma interface do usuário, e sim a organização da hierarquia visual do aplicativo. O Shell usa esses objetos e produz a interface do usuário de navegação para o conteúdo.
+
+## Pages (Páginas)
+
+As páginas são a raiz da hierarquia da interface do usuário no .NET MAUI dentro de um Shell. A solução que você viu até agora inclui uma classe chamada MainPage. Essa classe deriva de ContentPage, que é o tipo de página mais simples e mais comum. Uma página de conteúdo simplesmente exibe seu conteúdo. O .NET MAUI tem vários outros tipos de páginas internas, incluindo os seguintes:
+
+- TabbedPage: Esta é a página raiz usada para navegação em guias. Uma página com guias contém objetos de página filho; um para cada guia.
+- FlyoutPage: esta página permite que você implemente uma apresentação no estilo mestre/detalhes. Uma página de submenu contém uma lista de itens. Quando você seleciona um item, aparece uma exibição que mostra os detalhes desse item.
+
+Outros tipos de página estão disponíveis e são usados principalmente para habilitar padrões de navegação diferentes em aplicativos com várias telas.
+
+## Exibições
+
+Uma página de conteúdo normalmente mostra uma exibição. Uma exibição permite recuperar e apresentar dados de uma maneira específica. A exibição padrão de uma página de conteúdo é um ContentView, que exibe os itens no estado em que se encontram. Se reduzir a exibição, os itens poderão desaparecer até que você redimensione a exibição. Um ScrollView permite exibir itens em uma janela de rolagem. Se você reduzir a janela, poderá rolar para cima e para baixo para exibir os itens. Um CarouselView é uma exibição rolável que permite que o usuário passe o dedo para percorrer uma coleção de itens. Um CollectionView pode recuperar dados de uma fonte de dados nomeada e apresentar cada item usando um modelo como formato. Há muitos outros tipos de exibições disponíveis.
+
+## Controles e layouts
+
+Uma exibição pode conter apenas um controle, como um botão, um rótulo ou caixas de texto. (A rigor, uma exibição é em si um controle, portanto, uma exibição pode conter outra exibição.) Entretanto, uma interface do usuário restrita a um só controle não seria muito útil, por isso os controles são posicionados em um layout. Um layout define as regras segundo as quais os controles são exibidos em relação uns aos outros. Um layout também é um controle, portanto você pode adicioná-lo a uma exibição. Se você examinar o arquivo MainPage.xaml padrão, verá essa hierarquia de página/exibição/layout/controle em ação. Nesse código XAML, o elemento VerticalStackLayout é apenas um controle que permite ajustar o layout de outros controles.
+
+```
+<ContentPage ...>
+    <ScrollView ...>
+        <VerticalStackLayout>
+            <Image ... />
+            <Label ... />
+            <Label ... />
+            <Button ... />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+```
+
+Alguns dos controles comuns usados para definir layouts são:
+
+- VerticalStackLayout e HorizontalStackLayout, que são layouts de pilha otimizados que dispõem os controles em uma pilha de cima para baixo ou da esquerda para a direita. Um StackLayout também está disponível, com uma propriedade chamada StackOrientation que você pode definir como Horizontal ou Vertical. Em um tablet ou telefone, modificar essa propriedade no código do aplicativo permite ajustar a exibição caso o usuário gire o dispositivo
+- AbsoluteLayout, que permite definir coordenadas exatas para os controles.
+- FlexLayout, que é semelhante a StackLayout, mas permite encapsular os controles filho que ele contém se eles não couberem em uma só linha ou coluna. Esse layout também fornece opções de alinhamento e adaptação a diferentes tamanhos de tela. Por exemplo, um controle FlexLayout pode alinhar seu controle filho à esquerda, à direita ou ao centro quando organizado verticalmente. Quando alinhados horizontalmente, você pode justificar os controles para garantir um espaçamento uniforme. Você pode usar um FlexLayout horizontal dentro de um ScrollView para exibir uma série de quadros roláveis horizontalmente (cada quadro pode ser um FlexLayout organizado verticalmente)
+- Grid, que dispõe os controles conforme uma localização de linha e coluna que definimos. Você pode definir os tamanhos de linha e coluna, bem como as amplitudes, de modo que os layouts de grade não precisam necessariamente ter uma "aparência de xadrez".
+
+Todos os controles têm propriedades. Você pode definir valores iniciais para essas propriedades usando XAML. Em muitos casos, você pode modificar essas propriedades no código C# do aplicativo. Por exemplo, o código que manipula o evento Clicked para o botão Clique em mim no aplicativo .NET MAUI padrão tem esta aparência:
+
+```
+int count = 0;
+private void OnCounterClicked(object sender, EventArgs e)
+{
+    count+=5;
+
+    if (count == 1)
+        CounterBtn.Text = $"Clicked {count} time";
+    else
+        CounterBtn.Text = $"Clicked {count} times";
+
+    SemanticScreenReader.Announce(CounterBtn.Text);
+}
+```
+
+Esse código modifica a propriedade Text do controle CounterBtn na página. Você pode até mesmo criar páginas, exibições e layouts inteiros em seu código, sem precisar usar XAML. Por exemplo, considere a seguinte definição XAML de uma página:
+
+```
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Phoneword.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="Current count: 0"
+                Grid.Row="0"
+                FontSize="18"
+                FontAttributes="Bold"
+                x:Name="CounterLabel"
+                HorizontalOptions="Center" />
+
+            <Button Text="Click me"
+                Grid.Row="1"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+```
+
+O código equivalente em C# tem esta aparência:
+
+```
+public partial class TestPage : ContentPage
+{
+    int count = 0;
+    
+    // Named Label - declared as a member of the class
+    Label counterLabel;
+
+    public TestPage()
+    {       
+        var myScrollView = new ScrollView();
+
+        var myStackLayout = new VerticalStackLayout();
+        myScrollView.Content = myStackLayout;
+
+        counterLabel = new Label
+        {
+            Text = "Current count: 0",
+            FontSize = 18,
+            FontAttributes = FontAttributes.Bold,
+            HorizontalOptions = LayoutOptions.Center
+        };
+        myStackLayout.Children.Add(counterLabel);
+        
+        var myButton = new Button
+        {
+            Text = "Click me",
+            HorizontalOptions = LayoutOptions.Center
+        };
+        myStackLayout.Children.Add(myButton);
+
+        myButton.Clicked += OnCounterClicked;
+
+        this.Content = myScrollView;
+    }
+
+    private void OnCounterClicked(object sender, EventArgs e)
+    {
+        count++;
+        counterLabel.Text = $"Current count: {count}";
+
+        SemanticScreenReader.Announce(counterLabel.Text);
+    }
+}
+```
+
+O código C# é mais detalhado, mas fornece flexibilidade adicional que permite adaptar a interface do usuário dinamicamente.
+<br /><br />
+Para exibir esta página quando o aplicativo começar a ser executado, defina a classe TestPage em AppShell como a principal ShellContent:
+
+```
+<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:TestPage}"
+        Route="TestPage" />
+```
+
+## Ajustando um layout
+
+É útil adicionar algum espaço de fôlego ao redor de um controle. Cada controle tem uma propriedade Margin que os layouts respeitam. Você pode pensar em margem como o controle empurrando os outros para longe.
+<br /><br />
+Todos os layouts também têm uma propriedade Padding que impede que qualquer um de seus filhos se aproxime da borda do layout. Uma maneira de pensar nesse conceito é que todos os controles estão em uma caixa e essa caixa tem paredes acolchoadas.
+<br /><br />
+Outra configuração útil de espaço em branco é a propriedade Spacing de VerticalStackLayout ou HorizontalStackLayout. Esse é o espaço entre todos os filhos do layout. Isso se soma à própria margem do controle, de modo que o espaço em branco real seria a margem mais o espaçamento.

@@ -5,9 +5,9 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phoneword", "Phoneword\Phoneword.csproj", "{CC77014A-D55D-4148-AC02-4A014E552160}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{429E564F-42E7-40DA-B52A-94A2E40E5D6B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{053476D7-442E-4D6A-806C-6DBDF457DDE4}"
 	ProjectSection(SolutionItems) = preProject
-		..\readme.md = ..\readme.md
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Global
