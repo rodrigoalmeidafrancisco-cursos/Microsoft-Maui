@@ -1,4 +1,4 @@
-﻿namespace MauiApp1
+﻿namespace Phoneword
 {
     public partial class MainPage : ContentPage
     {
