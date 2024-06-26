@@ -1,4 +1,4 @@
-﻿# 001 - Criar aplicativos móveis e da área de trabalho com o .NET MAUI
+﻿# 001 - Criar um aplicativo multiplataforma com o .NET MAUI
 
 
 ## App.xaml
